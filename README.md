@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/g7qfliyjkhfk8xt7?svg=true)](https://ci.appveyor.com/project/Maskinka/pageobject)

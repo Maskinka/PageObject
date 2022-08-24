@@ -11,8 +11,8 @@ import static com.codeborne.selenide.Selenide.$$;
 public class DashboardPage {
     private SelenideElement heading = $("[data-test-id=dashboard]");
     private ElementsCollection buttons = $$("[data-test-id=\"action-deposit\"] .button__content");
-    private static SelenideElement firstCardButton = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] > .button");
-    private static SelenideElement secondCardButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] > .button");
+    private SelenideElement transferFirstCardButton = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] > .button");
+    private SelenideElement transferSecondCardButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] > .button");
     private ElementsCollection cards = $$(".list__item div");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
@@ -31,14 +31,12 @@ public class DashboardPage {
         return extractBalance(text);
     }
 
-    public static TransferPage pushFirstCardButton() {
-        firstCardButton.click();
-        return new TransferPage();
+    public void pushFirstCardButton() {
+        transferFirstCardButton.click();
     }
 
-    public static TransferPage pushSecondCardButton() {
-        secondCardButton.click();
-        return new TransferPage();
+    public void  pushSecondCardButton() {
+        transferSecondCardButton.click();
     }
 
     private int extractBalance(String text) {

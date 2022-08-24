@@ -13,14 +13,13 @@ public class TransferPage {
     private SelenideElement fromField = $("[data-test-id=from] input"); // с поля
     private SelenideElement transferButton = $("[data-test-id=action-transfer]");//кнопка передачи
 
-    public DashboardPage transferMoney(int amount, DataHelper.CardInfo from) {
+    public void transferMoney(int amount, DataHelper.CardInfo from) {
         amountField.setValue(valueOf(amount));
         fromField.setValue(String.valueOf(from));
         transferButton.click();
-        return new DashboardPage();
     }
 
-    public static void getErrorLimit() {
+    public void getErrorLimit() {
         $(byText("Ошибка!")).shouldBe(visible);
     }
 }

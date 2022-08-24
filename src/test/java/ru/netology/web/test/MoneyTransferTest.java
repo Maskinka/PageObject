@@ -11,8 +11,7 @@ import ru.netology.web.page.TransferPage;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.web.data.DataHelper.*;
-import static ru.netology.web.page.DashboardPage.pushFirstCardButton;
-import static ru.netology.web.page.DashboardPage.pushSecondCardButton;
+
 
 class MoneyTransferTest {
     @BeforeEach
@@ -29,10 +28,11 @@ class MoneyTransferTest {
     public void shouldTransferMoneyFromFirstCardToSecondCard() {
         int amount = 3_000;
         val dashboardPage = new DashboardPage();
+        val transferPage= new TransferPage();
         val firstCardBalanceBeforeTransfer = dashboardPage.getFirstCardBalance();
         val secondCardBalanceBeforeTransfer = dashboardPage.getSecondCardBalance();
-        val transactionPage = pushSecondCardButton();
-        transactionPage.transferMoney(amount, getFirstCardNumber());
+        dashboardPage.pushSecondCardButton();
+        transferPage.transferMoney(amount, getFirstCardNumber());
         val firstCardBalance = firstCardBalanceBeforeTransfer - amount;
         val secondCardBalance = secondCardBalanceBeforeTransfer + amount;
 
@@ -44,10 +44,11 @@ class MoneyTransferTest {
     public void shouldTransferMoneyFromSecondCardToFirstCard() {
         int amount = 6_000;
         val dashboardPage = new DashboardPage();
+        val transferPage= new TransferPage();
         val firstCardBalanceBeforeTransfer = dashboardPage.getFirstCardBalance();
         val secondCardBalanceBeforeTransfer = dashboardPage.getSecondCardBalance();
-        val transactionPage = pushFirstCardButton();
-        transactionPage.transferMoney(amount, getSecondCardNumber());
+        dashboardPage.pushFirstCardButton();
+        transferPage.transferMoney(amount, getSecondCardNumber());
         val firstCardBalance = firstCardBalanceBeforeTransfer + amount;
         val secondCardBalance = secondCardBalanceBeforeTransfer - amount;
 
@@ -59,11 +60,12 @@ class MoneyTransferTest {
     public void shouldHaveNotGoodBalance() {
         int amount = 11_000;
         val dashboardPage = new DashboardPage();
+        val transferPage= new TransferPage();
         val firstCardBalanceBeforeTransfer = dashboardPage.getFirstCardBalance();
         val secondCardBalanceBeforeTransfer = dashboardPage.getSecondCardBalance();
-        val transactionPage = pushFirstCardButton();
-        transactionPage.transferMoney(amount, getSecondCardNumber());
-        TransferPage.getErrorLimit();
+        dashboardPage.pushFirstCardButton();
+        transferPage.transferMoney(amount, getSecondCardNumber());
+        transferPage.getErrorLimit();
     }
 }
 
